@@ -1,8 +1,12 @@
-import express from "express"
+import express from "express";
+import { sequelize } from "./database";
 
-const app = express()
-const PORT = process.env.PORT || 3000
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-   console.log(`Server started successfuly at port: ${PORT}`)
-})
+  sequelize.authenticate().then(() => {
+    console.log(`DB connection established`);
+  });
+  console.log(`Server started successfuly at port: ${PORT}`);
+});
